@@ -16,16 +16,6 @@ public class PolypackHttpHandler implements HttpHandler {
         return handler;
     }
 
-    public void stop(HttpExchange exchange) {
-        try {
-            exchange.sendResponseHeaders(200, 0);
-            OutputStream out = exchange.getResponseBody();
-            out.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         if (Objects.equals(exchange.getRequestMethod(), "GET")) {

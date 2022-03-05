@@ -1,18 +1,15 @@
 package com.github.aws404.polypackhost;
 
 import com.google.common.hash.Hashing;
-import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 import eu.pb4.polymer.api.resourcepack.PolymerRPUtils;
 import net.minecraft.server.MinecraftServer;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import static com.google.common.io.Files.asByteSource;
 

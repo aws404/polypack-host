@@ -1,9 +1,6 @@
 package com.github.aws404.polypackhost.mixin;
 
-import com.github.aws404.polypackhost.PolypackHttpHandler;
 import com.github.aws404.polypackhost.PolypackHttpServer;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpServer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.WorldGenerationProgressListener;
 import org.spongepowered.asm.mixin.Mixin;
