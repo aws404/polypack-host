@@ -6,12 +6,13 @@ import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class PolypackHostConfig {
     public static final File CONFIG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "polypack_host.json");
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().serializeNulls().disableHtmlEscaping().create();
 
-    public String hostIp = null;
+    public String externalIp = "127.0.0.1";
     public int hostPort = 8001;
     public int threadCount = 3;
     public boolean randomiseUrl = false;
@@ -29,6 +30,9 @@ public class PolypackHostConfig {
         }
         if (config == null) {
             config = new PolypackHostConfig();
+        }
+        if (Objects.equals(config.externalIp, "127.0.0.1")) {
+            PolypackHostMod.LOGGER.warn("External ip should be set to your external/public ip.");
         }
 
         config.saveConfigFile(file);
