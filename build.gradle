@@ -20,7 +20,8 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
-	modImplementation("eu.pb4:polymer:${project.polymer_version}")
+	modImplementation "net.fabricmc.fabric-api:fabric-api:${rootProject.fabric_version}"
+	modImplementation "eu.pb4:polymer:${project.polymer_version}"
 }
 
 processResources {

@@ -20,14 +20,12 @@
       "com.github.aws404.polypackhost.PolypackHostMod"
     ]
   },
-  "mixins": [
-    "polypack_host.mixins.json"
-  ],
 
   "depends": {
     "fabricloader": ">=0.11.3",
     "minecraft": "1.18.x",
     "polymer": "*",
+    "fabric-lifecycle-events-v1": "*",
     "java": ">=17"
   }
 }
