@@ -7,6 +7,8 @@ import com.sun.net.httpserver.HttpServer;
 import eu.pb4.polymer.api.resourcepack.PolymerRPUtils;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.dedicated.MinecraftDedicatedServer;
+import net.minecraft.text.Text;
 
 import java.io.*;
 import java.math.BigInteger;
@@ -15,6 +17,7 @@ import java.net.InetSocketAddress;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutorService;
@@ -64,7 +67,15 @@ public class PolypackHttpHandler implements HttpHandler {
                         .digest(new FileInputStream(POLYMER_PACK_FILE.toString()).readAllBytes()))
                 );
 
-                minecraftServer.setResourcePack(packIp, hash);
+                if (minecraftServer instanceof MinecraftDedicatedServer dedicatedServer) {
+                    boolean required = false;
+                    Text prompt = Text.empty();
+                    if (dedicatedServer.getProperties().serverResourcePackProperties.isPresent()) {
+                        required = dedicatedServer.getProperties().serverResourcePackProperties.get().isRequired();
+                        prompt = dedicatedServer.getProperties().serverResourcePackProperties.get().prompt();
+                    }
+                    dedicatedServer.getProperties().serverResourcePackProperties = Optional.of(new MinecraftServer.ServerResourcePackProperties(packIp, hash, required, prompt));
+                }
 
                 PolypackHostMod.LOGGER.info("Polymer resource pack host started at {} (Hash: {})", packIp, hash);
             } catch (Exception e) {
